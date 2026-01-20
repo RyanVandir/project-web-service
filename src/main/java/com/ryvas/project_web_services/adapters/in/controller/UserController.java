@@ -1,5 +1,6 @@
 package com.ryvas.project_web_services.adapters.in.controller;
 
+import com.ryvas.project_web_services.adapters.out.entity.UserEntity;
 import com.ryvas.project_web_services.domain.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @GetMapping
-    public ResponseEntity<User> findAll() {
+    public ResponseEntity<UserEntity> findAll() {
         return ResponseEntity.ok()
-                .body(new User(1,
+                .body(new UserEntity(1,
                         "Ryan",
                         "bdhefrejwn@dhhs",
                         "179992055559",
