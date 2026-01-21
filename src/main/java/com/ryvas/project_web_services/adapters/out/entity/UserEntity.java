@@ -1,8 +1,10 @@
 package com.ryvas.project_web_services.adapters.out.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ToString
@@ -21,6 +23,16 @@ public class UserEntity {
     private String phone;
     private String password;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    List<OrderEntity> orders;
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    @Setter(AccessLevel.NONE)
+    List<OrderEntity> orders = new ArrayList<>();
+
+    public UserEntity(Integer id, String name, String email, String phone, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 }
