@@ -21,7 +21,9 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
         UserEntity u1 = new UserEntity(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         UserEntity u2 = new UserEntity(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
+        UserEntity u3 = new UserEntity(null, "Ryan Brass", "ryan@gmail.com", "966666666", "123456");
+        UserEntity u4 = new UserEntity(null, "Liva Gran", "livia@gmail.com", "955555555", "123456");
 
-        repository.saveAll(Arrays.asList(u1, u2));
+        repository.saveAll(Arrays.asList(u1, u2, u3, u4));
     }
 }

@@ -1,7 +1,7 @@
 package com.ryvas.project_web_services.adapters.in.controller;
 
 import com.ryvas.project_web_services.domain.model.User;
-import com.ryvas.project_web_services.port.out.UserServicePort;
+import com.ryvas.project_web_services.port.in.UserUseCasePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserServicePort userService;
+    private final UserUseCasePort userUseCasePort;
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok().body(userService.findAll());
+        return ResponseEntity.ok().body(userUseCasePort.findAll());
     }
 }
