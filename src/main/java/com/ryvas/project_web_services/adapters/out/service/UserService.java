@@ -30,4 +30,11 @@ public class UserService implements UserServicePort {
         userRepository.delete(userEntity);
         return userMapper.toModel(userEntity);
     }
+
+    @Override
+    public User findById(Integer id) {
+        UserEntity userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado!"));
+        return userMapper.toModel(userEntity);
+    }
 }

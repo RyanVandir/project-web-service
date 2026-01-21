@@ -4,9 +4,7 @@ import com.ryvas.project_web_services.domain.model.User;
 import com.ryvas.project_web_services.port.in.UserUseCasePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,15 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.ok().body(userUseCasePort.findAll());
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<User> deleteById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(userUseCasePort.deleteById(id));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<User> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(userUseCasePort.findById(id));
     }
 }

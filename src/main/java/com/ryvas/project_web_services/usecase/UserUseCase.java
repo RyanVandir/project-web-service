@@ -24,4 +24,19 @@ public class UserUseCase implements UserUseCasePort {
         return users;
     }
 
+    @Override
+    public User deleteById(Integer id) {
+        if (userServicePort.findById(id) == null) {
+            throw new UserNotFoundException("Nenhum usuário encontrado");
+        }
+        return userServicePort.deleteById(id);
+    }
+
+    @Override
+    public User findById(Integer id) {
+        if (userServicePort.findById(id) == null) {
+            throw new UserNotFoundException("Nenhum usuário encontrado");
+        }
+        return userServicePort.findById(id);
+    }
 }

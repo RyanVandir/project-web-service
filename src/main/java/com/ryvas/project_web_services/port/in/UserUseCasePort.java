@@ -7,4 +7,8 @@ import java.util.List;
 public interface UserUseCasePort {
 
     List<User> findAll();
+
+    User deleteById(Integer id);
+
+    User findById(Integer id);
 }
