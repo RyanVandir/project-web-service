@@ -3,6 +3,8 @@ package com.ryvas.project_web_services.adapters.out.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,5 +19,8 @@ public class UserEntity {
     private String name;
     private String email;
     private String phone;
-    private String password;;
+    private String password;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    List<OrderEntity> orders;
 }
