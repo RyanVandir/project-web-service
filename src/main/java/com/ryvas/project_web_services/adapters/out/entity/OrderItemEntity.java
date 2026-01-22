@@ -5,7 +5,7 @@ import com.ryvas.project_web_services.adapters.out.entity.pk.OrderItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,6 +34,7 @@ public class OrderItemEntity {
     public OrderEntity getOrder(){
         return id.getOrderEntity();
     }
+    @JsonIgnore
     public ProductEntity getProduct(){
         return id.getProductEntity();
     }

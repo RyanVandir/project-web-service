@@ -20,12 +20,14 @@ public class Order {
 
     private Set<OrderItem> orderItems = new HashSet<>();
 
-    public Order(Integer id, Instant moment, User client, OrderStatus orderStatus) {
+    private Payment payment;
+
+    public Order(Integer id, Instant moment, OrderStatus orderStatus, User client) {
         validate(moment, client, orderStatus);
         this.id = id;
         this.moment = moment;
-        this.client = client;
         this.orderStatus = orderStatus;
+        this.client = client;
     }
 
     private void validate(Instant moment, User client, OrderStatus orderStatus) {
@@ -58,5 +60,9 @@ public class Order {
         return orderItems.stream()
                 .mapToDouble(OrderItem::getSubTotal)
                 .sum();
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

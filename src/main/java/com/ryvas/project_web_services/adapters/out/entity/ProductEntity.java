@@ -29,6 +29,9 @@ public class ProductEntity {
     inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryEntity> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.productEntity")
+    private Set<OrderItemEntity> orderItems = new HashSet<>();
+
     public ProductEntity(Integer id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
