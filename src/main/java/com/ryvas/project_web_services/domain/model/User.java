@@ -27,22 +27,22 @@ public class User {
     }
 
     private void validate(String name, String email, String phone, String password) {
-        if (name == null || name.isEmpty()) {
+        if (name == null || name.isBlank()) {
             throw new InvalidUserException("Nome obrigatório!");
         }
         if (name.trim().length() < 3) {
             throw new InvalidUserException("Nome deve conter no mínimo 3 caracteres!");
         }
-        if (email == null || email.isEmpty()) {
+        if (email == null || email.isBlank()) {
             throw new InvalidUserException("Email obrigatório!");
         }
-        if (phone == null || phone.isEmpty()) {
+        if (phone == null || phone.isBlank()) {
             throw new InvalidUserException("Telefone obrigatório!");
         }
         if (phone.trim().length() < 8 || phone.trim().length() > 12) {
             throw new InvalidUserException("Número de telefone inválido!");
         }
-        if (password == null || password.isEmpty()) {
+        if (password == null || password.isBlank()) {
             throw new InvalidUserException("Senha obrigatória!");
         }
     }
