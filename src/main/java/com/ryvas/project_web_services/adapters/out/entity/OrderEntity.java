@@ -1,6 +1,7 @@
 package com.ryvas.project_web_services.adapters.out.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ryvas.project_web_services.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,4 +25,7 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 }
