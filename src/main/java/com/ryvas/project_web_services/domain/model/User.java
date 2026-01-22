@@ -4,8 +4,6 @@ import com.ryvas.project_web_services.domain.exception.InvalidUserException;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.List;
-
 @Getter
 @ToString
 public class User {
@@ -15,7 +13,6 @@ public class User {
     private String phone;
     private String password;
 
-    private List<Order> orders;
 
     public User(Integer id, String name, String email, String phone, String password) {
         validate(name, email, phone, password);

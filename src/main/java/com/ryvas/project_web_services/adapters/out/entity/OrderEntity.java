@@ -1,17 +1,17 @@
 package com.ryvas.project_web_services.adapters.out.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ryvas.project_web_services.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "tb_order")
 public class OrderEntity {
@@ -26,6 +26,18 @@ public class OrderEntity {
     @JoinColumn(name = "client_id")
     private UserEntity client;
 
+
+    @OneToMany(mappedBy = "id.orderEntity")
+    private Set<OrderItemEntity> orderItems = new HashSet<>();
+
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    public OrderEntity(Integer id, Instant moment, UserEntity client, OrderStatus orderStatus) {
+        this.id = id;
+        this.moment = moment;
+        this.client = client;
+        this.orderItems = orderItems;
+        this.orderStatus = orderStatus;
+    }
 }

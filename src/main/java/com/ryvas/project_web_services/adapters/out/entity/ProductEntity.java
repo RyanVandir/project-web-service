@@ -27,7 +27,6 @@ public class ProductEntity {
     @JoinTable(name = "tb_product_category",
     joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id"))
-
     private Set<CategoryEntity> categories = new HashSet<>();
 
     public ProductEntity(Integer id, String name, String description, Double price, String imgUrl) {

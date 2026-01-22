@@ -1,13 +1,7 @@
 package com.ryvas.project_web_services.testconfig;
 
-import com.ryvas.project_web_services.adapters.out.entity.CategoryEntity;
-import com.ryvas.project_web_services.adapters.out.entity.OrderEntity;
-import com.ryvas.project_web_services.adapters.out.entity.ProductEntity;
-import com.ryvas.project_web_services.adapters.out.entity.UserEntity;
-import com.ryvas.project_web_services.adapters.out.repository.CategoryRepository;
-import com.ryvas.project_web_services.adapters.out.repository.OrderRepository;
-import com.ryvas.project_web_services.adapters.out.repository.ProductRepository;
-import com.ryvas.project_web_services.adapters.out.repository.UserRepository;
+import com.ryvas.project_web_services.adapters.out.entity.*;
+import com.ryvas.project_web_services.adapters.out.repository.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +22,7 @@ public class TestConfig implements CommandLineRunner {
     private final OrderRepository orderRepository;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -54,10 +49,17 @@ public class TestConfig implements CommandLineRunner {
         p4.getCategories().add(cat3);
         p5.getCategories().add(cat2);
 
+        OrderItemEntity oi1 = new OrderItemEntity(o1, p1, 2, p1.getPrice());
+        OrderItemEntity oi2 = new OrderItemEntity(o1, p3, 1, p3.getPrice());
+        OrderItemEntity oi3 = new OrderItemEntity(o2, p3, 2, p3.getPrice());
+        OrderItemEntity oi4 = new OrderItemEntity(o3, p5, 2, p5.getPrice());
+
+
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
 
     }
