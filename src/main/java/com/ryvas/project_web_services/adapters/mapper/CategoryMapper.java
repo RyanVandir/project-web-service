@@ -1,0 +1,23 @@
+package com.ryvas.project_web_services.adapters.mapper;
+
+import com.ryvas.project_web_services.adapters.out.entity.CategoryEntity;
+import com.ryvas.project_web_services.domain.model.Category;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+
+import java.util.List;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface CategoryMapper {
+
+    // Domain -> Entity
+    List<CategoryEntity> toEntity(List<Category> categories);
+
+    CategoryEntity toEntity(Category category);
+
+    // Entity -> Domain
+    List<Category> toModel(List<CategoryEntity> categoryEntities);
+
+    Category toModel(CategoryEntity categoryEntity);
+
+}

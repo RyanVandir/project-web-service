@@ -1,9 +1,9 @@
 package com.ryvas.project_web_services.testconfig;
 
-import com.ryvas.project_web_services.adapters.mapper.OrderMapper;
-import com.ryvas.project_web_services.adapters.mapper.UserMapper;
+import com.ryvas.project_web_services.adapters.out.entity.CategoryEntity;
 import com.ryvas.project_web_services.adapters.out.entity.OrderEntity;
 import com.ryvas.project_web_services.adapters.out.entity.UserEntity;
+import com.ryvas.project_web_services.adapters.out.repository.CategoryRepository;
 import com.ryvas.project_web_services.adapters.out.repository.OrderRepository;
 import com.ryvas.project_web_services.adapters.out.repository.UserRepository;
 
@@ -22,10 +22,9 @@ import static com.ryvas.project_web_services.domain.enums.OrderStatus.*;
 @RequiredArgsConstructor
 public class TestConfig implements CommandLineRunner {
 
-    private final UserRepository repository;
-    private final UserMapper userMapper;
+    private final UserRepository userRepository;
     private final OrderRepository orderRepository;
-    private final OrderMapper orderMapper;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,7 +35,13 @@ public class TestConfig implements CommandLineRunner {
         OrderEntity o2 = new OrderEntity(null, Instant.parse("2019-07-21T03:42:10Z"), u2, WAITING_PAYMENT);
         OrderEntity o3 = new OrderEntity(null, Instant.parse("2019-07-22T15:21:22Z"), u1, DELIVERED);
 
-        repository.saveAll(Arrays.asList(u1, u2));
+        CategoryEntity cat1 = new CategoryEntity(null, "Electronics");
+        CategoryEntity cat2 = new CategoryEntity(null, "Books");
+        CategoryEntity cat3 = new CategoryEntity(null, "Computers");
+
+        userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
     }
 }
