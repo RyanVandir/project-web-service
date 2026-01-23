@@ -5,6 +5,7 @@ import com.ryvas.project_web_services.adapters.in.dto.UserResponse;
 import com.ryvas.project_web_services.adapters.mapper.UserMapper;
 import com.ryvas.project_web_services.port.in.UserUseCasePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,10 @@ public class UserController {
     private final UserUseCasePort userUseCasePort;
     private final UserMapper userMapper;
 
+    @ResponseBody
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.CREATED).body(
                 userMapper.toResponse(
                         userUseCasePort.insert(
                                 userMapper.toModel(userDto))
@@ -35,7 +37,7 @@ public class UserController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<UserResponse> deleteById(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.deleteById(id)));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(userMapper.toResponse(userUseCasePort.deleteById(id)));
     }
 
     @GetMapping("{id}")
