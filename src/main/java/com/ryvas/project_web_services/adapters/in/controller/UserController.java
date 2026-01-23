@@ -19,7 +19,6 @@ public class UserController {
     private final UserUseCasePort userUseCasePort;
     private final UserMapper userMapper;
 
-    @ResponseBody
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserDto userDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(

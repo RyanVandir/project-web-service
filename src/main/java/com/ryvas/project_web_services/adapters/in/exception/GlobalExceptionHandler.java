@@ -35,4 +35,11 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
     }
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler({DatabaseException.class})
+    public ErrorResponse handlerDatabaseException(Exception e) {
+        return new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value());
+    }
+
 }
