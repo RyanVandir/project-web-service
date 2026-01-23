@@ -39,4 +39,9 @@ public class UserUseCase implements UserUseCasePort {
     public User insert(User user) {
         return userServicePort.insert(user);
     }
+
+    @Override
+    public User update(Integer id, User user) {
+        return userServicePort.update(id, user);
+    }
 }

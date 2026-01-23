@@ -1,6 +1,7 @@
 package com.ryvas.project_web_services.adapters.out.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ryvas.project_web_services.domain.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,5 +35,20 @@ public class UserEntity {
         this.email = email;
         this.phone = phone;
         this.password = password;
+    }
+
+    public void update(User user) {
+        if (user.getName() != null && !user.getName().isBlank()) {
+            this.name = user.getName();
+        }
+        if (user.getEmail() != null && !user.getEmail().isBlank()) {
+            this.email = user.getEmail();
+        }
+        if (user.getPhone() != null && !user.getPhone().isBlank()) {
+            this.phone = user.getPhone();
+        }
+        if (user.getPassword() != null && !user.getPassword().isBlank()) {
+            this.password = user.getPassword();
+        }
     }
 }

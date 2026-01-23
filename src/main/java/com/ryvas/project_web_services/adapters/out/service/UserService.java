@@ -42,4 +42,12 @@ public class UserService implements UserServicePort {
     public User insert(User user) {
         return userMapper.toModel(userRepository.save(userMapper.toEntity(user)));
     }
+
+    @Override
+    public User update(Integer id, User user) {
+        UserEntity userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado!"));
+        userEntity.update(user);
+        return userMapper.toModel(userRepository.save(userEntity));
+    }
 }

@@ -42,4 +42,9 @@ public class UserController {
     public ResponseEntity<UserResponse> findById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.findById(id)));
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<UserResponse> update(@PathVariable Integer id, @RequestBody UserDto userDto) {
+        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.update(id, userMapper.toModel(userDto))));
+    }
 }

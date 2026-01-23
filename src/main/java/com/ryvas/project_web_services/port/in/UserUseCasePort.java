@@ -13,4 +13,6 @@ public interface UserUseCasePort {
     User findById(Integer id);
 
     User insert(User user);
+
+    User update(Integer id, User user);
 }
