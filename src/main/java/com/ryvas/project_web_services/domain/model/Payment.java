@@ -1,5 +1,6 @@
 package com.ryvas.project_web_services.domain.model;
 
+import com.ryvas.project_web_services.domain.exception.InvalidPaymentException;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -12,13 +13,14 @@ public class Payment {
     private Integer id;
     private Instant moment;
 
-    private Order order;
-
-    public Payment(Integer id, Instant moment, Order order) {
+    public Payment(Integer id, Instant moment) {
+        validate(moment);
         this.id = id;
         this.moment = moment;
-        this.order = order;
     }
-
-
+    private void validate(Instant moment) {
+        if (moment == null) {
+            throw new InvalidPaymentException("Data do pagamento é obrigatória");
+        }
+    }
 }

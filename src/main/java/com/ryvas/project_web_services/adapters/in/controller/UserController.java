@@ -1,6 +1,8 @@
 package com.ryvas.project_web_services.adapters.in.controller;
 
-import com.ryvas.project_web_services.domain.model.User;
+import com.ryvas.project_web_services.adapters.in.dto.UserDto;
+import com.ryvas.project_web_services.adapters.in.dto.UserResponse;
+import com.ryvas.project_web_services.adapters.mapper.UserMapper;
 import com.ryvas.project_web_services.port.in.UserUseCasePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +16,30 @@ import java.util.List;
 public class UserController {
 
     private final UserUseCasePort userUseCasePort;
+    private final UserMapper userMapper;
+
+    @PostMapping
+    public ResponseEntity<UserResponse> create(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok(
+                userMapper.toResponse(
+                        userUseCasePort.insert(
+                                userMapper.toModel(userDto))
+                )
+        );
+    }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok().body(userUseCasePort.findAll());
+    public ResponseEntity<List<UserResponse>> findAll() {
+        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.findAll()));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<User> deleteById(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(userUseCasePort.deleteById(id));
+    public ResponseEntity<UserResponse> deleteById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.deleteById(id)));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<User> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(userUseCasePort.findById(id));
+    public ResponseEntity<UserResponse> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.findById(id)));
     }
 }

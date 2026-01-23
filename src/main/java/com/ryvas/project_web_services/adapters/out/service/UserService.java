@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -32,9 +33,13 @@ public class UserService implements UserServicePort {
     }
 
     @Override
-    public User findById(Integer id) {
-        UserEntity userEntity = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado!"));
-        return userMapper.toModel(userEntity);
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id)
+                .map(userMapper::toModel);
+    }
+
+    @Override
+    public User insert(User user) {
+        return userMapper.toModel(userRepository.save(userMapper.toEntity(user)));
     }
 }

@@ -1,6 +1,7 @@
 package com.ryvas.project_web_services.domain.model;
 
 import com.ryvas.project_web_services.domain.enums.OrderStatus;
+import com.ryvas.project_web_services.domain.exception.InvalidOrderException;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -32,37 +33,40 @@ public class Order {
 
     private void validate(Instant moment, User client, OrderStatus orderStatus) {
         if (moment == null){
-            throw new RuntimeException("Data do pedido obrigatória");
+            throw new InvalidOrderException("Data do pedido obrigatória");
         }
         if (client == null){
-            throw new RuntimeException("Pedido precisa ter um cliente");
+            throw new InvalidOrderException("Pedido precisa ter um cliente");
         }
         if (orderStatus == null){
-            throw new RuntimeException("Status de pedido é obrigatório");
+            throw new InvalidOrderException("Status de pedido é obrigatório");
         }
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
         if (orderStatus == null){
-            throw new RuntimeException("Status inválido");
+            throw new InvalidOrderException("Status inválido");
         }
         this.orderStatus = orderStatus;
     }
 
     public void addOrderItem(OrderItem orderItem) {
         if (orderItem == null) {
-            throw new RuntimeException("Item inválido");
+            throw new InvalidOrderException("Item inválido");
         }
         orderItems.add(orderItem);
     }
 
-    public Double total(){
+    public Double getTotal(){
         return orderItems.stream()
                 .mapToDouble(OrderItem::getSubTotal)
                 .sum();
     }
 
     public void setPayment(Payment payment) {
+        if (payment == null){
+            throw new RuntimeException("Pagamento inválido!");
+        }
         this.payment = payment;
     }
 }
