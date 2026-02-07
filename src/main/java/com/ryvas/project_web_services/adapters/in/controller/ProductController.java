@@ -1,13 +1,13 @@
 package com.ryvas.project_web_services.adapters.in.controller;
 
-import com.ryvas.project_web_services.domain.model.Product;
+import com.ryvas.project_web_services.adapters.in.dto.ProductDto;
+import com.ryvas.project_web_services.adapters.in.dto.ProductResponse;
+import com.ryvas.project_web_services.adapters.mapper.ProductMapper;
 import com.ryvas.project_web_services.port.in.ProductUseCasePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,14 +17,33 @@ import java.util.List;
 public class ProductController {
 
     private final ProductUseCasePort productUseCasePort;
+    private final ProductMapper productMapper;
+
+    @PostMapping
+    public ResponseEntity<ProductResponse> created(@RequestBody ProductDto productDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                productMapper.toResponse(
+                        productUseCasePort.created(productMapper.toModel(productDto))
+                )
+        );
+    }
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
-        return ResponseEntity.ok().body(productUseCasePort.findAll());
+    public ResponseEntity<List<ProductResponse>> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(productMapper.toResponse(productUseCasePort.findAll()));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Product> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(productUseCasePort.findById(id));
+    public ResponseEntity<ProductResponse> findById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(productMapper.toResponse(productUseCasePort.findById(id)));
+    }
+
+    @PutMapping
+    public ResponseEntity<ProductResponse> update(@PathVariable Integer id, @RequestBody ProductDto productDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                productMapper.toResponse(
+                        productUseCasePort.updated(id, productMapper.toModel(productDto))
+                )
+        );
     }
 }

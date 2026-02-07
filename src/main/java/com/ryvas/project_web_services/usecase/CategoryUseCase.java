@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -16,7 +17,7 @@ public class CategoryUseCase implements CategoryUseCasePort {
     private final CategoryServicePort categoryServicePort;
 
     @Override
-    public List<Category> findAll() {
+    public Set<Category> findAll() {
         return categoryServicePort.findAll();
     }
 

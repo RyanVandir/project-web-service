@@ -10,4 +10,8 @@ public interface ProductServicePort {
     List<Product> findAll();
 
     Optional<Product> findById(Integer id);
+
+    Product created(Product product);
+
+    Product updated(Integer id, Product product);
 }

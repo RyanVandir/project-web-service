@@ -6,17 +6,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CategoryMapper {
 
     // Domain -> Entity
-    List<CategoryEntity> toEntity(List<Category> categories);
+    Set<CategoryEntity> toEntity(List<Category> categories);
 
     CategoryEntity toEntity(Category category);
 
     // Entity -> Domain
-    List<Category> toModel(List<CategoryEntity> categoryEntities);
+    Set<Category> toModel(List<CategoryEntity> categoryEntities);
 
     Category toModel(CategoryEntity categoryEntity);
 

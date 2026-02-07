@@ -9,4 +9,8 @@ public interface ProductUseCasePort {
     List<Product> findAll();
 
     Product findById(Integer id);
+
+    Product created(Product product);
+
+    Product updated(Integer id, Product product);
 }

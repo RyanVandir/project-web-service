@@ -18,7 +18,7 @@ public class Product {
 
     private Set<Category> categories;
 
-    public Product(Integer id, String name, String description, Double price, String imgUrl,  Set<Category> categories) {
+    public Product(Integer id, String name, String description, Double price, String imgUrl, Set<Category> categories) {
         validate(name, description, price, imgUrl, categories);
         this.id = id;
         this.name = name;
@@ -28,7 +28,7 @@ public class Product {
         this.categories = Set.copyOf(categories); // imutável
     }
 
-    private void validate(String name, String description, Double price,  String imgUrl,  Set<Category> categories) {
+    private void validate(String name, String description, Double price, String imgUrl, Set<Category> categories) {
         if (name == null || name.isBlank()) {
             throw new InvalidProductException("Produto precisa possuir um nome");
         }
@@ -41,5 +41,9 @@ public class Product {
         if (categories == null || categories.isEmpty()) {
             throw new InvalidProductException("Produto precisa possuir ao menos uma categoria");
         }
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = Set.copyOf(categories);
     }
 }

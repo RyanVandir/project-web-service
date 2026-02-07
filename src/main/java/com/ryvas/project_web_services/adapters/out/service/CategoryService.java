@@ -1,16 +1,14 @@
 package com.ryvas.project_web_services.adapters.out.service;
 
 import com.ryvas.project_web_services.adapters.mapper.CategoryMapper;
-import com.ryvas.project_web_services.adapters.out.entity.CategoryEntity;
 import com.ryvas.project_web_services.adapters.out.repository.CategoryRepository;
-import com.ryvas.project_web_services.domain.exception.CategoryNotFoundException;
 import com.ryvas.project_web_services.domain.model.Category;
 import com.ryvas.project_web_services.port.out.CategoryServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -21,7 +19,7 @@ public class CategoryService implements CategoryServicePort {
 
 
     @Override
-    public List<Category> findAll() {
+    public Set<Category> findAll() {
         return categoryMapper.toModel(categoryRepository.findAll());
     }
 

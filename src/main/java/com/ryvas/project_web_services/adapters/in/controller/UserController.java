@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll() {
-        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.findAll()));
+        return ResponseEntity.status(HttpStatus.OK).body(userMapper.toResponse(userUseCasePort.findAll()));
     }
 
     @DeleteMapping("{id}")
@@ -41,11 +41,11 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<UserResponse> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.findById(id)));
+        return ResponseEntity.status(HttpStatus.OK).body(userMapper.toResponse(userUseCasePort.findById(id)));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Integer id, @RequestBody UserDto userDto) {
-        return ResponseEntity.ok().body(userMapper.toResponse(userUseCasePort.update(id, userMapper.toModel(userDto))));
+        return ResponseEntity.status(HttpStatus.OK).body(userMapper.toResponse(userUseCasePort.update(id, userMapper.toModel(userDto))));
     }
 }

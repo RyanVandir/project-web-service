@@ -1,7 +1,9 @@
 package com.ryvas.project_web_services.adapters.out.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,11 +24,10 @@ public class ProductEntity {
     private Double price;
     private String imgUrl;
 
-    @Setter(AccessLevel.NONE)
     @ManyToMany
     @JoinTable(name = "tb_product_category",
-    joinColumns = @JoinColumn(name = "product_id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id"))
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryEntity> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "id.productEntity")
@@ -39,4 +40,5 @@ public class ProductEntity {
         this.price = price;
         this.imgUrl = imgUrl;
     }
+
 }
