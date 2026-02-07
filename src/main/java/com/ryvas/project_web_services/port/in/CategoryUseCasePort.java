@@ -10,5 +10,5 @@ public interface CategoryUseCasePort {
 
     Category findById(Integer id);
 
-    Category findByName(String name);
+    Category created(Category category);
 }

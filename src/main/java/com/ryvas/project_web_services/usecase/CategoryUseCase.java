@@ -28,9 +28,7 @@ public class CategoryUseCase implements CategoryUseCasePort {
     }
 
     @Override
-    public Category findByName(String name) {
-        return categoryServicePort.findByName(name)
-                .orElseThrow(() -> new CategoryNotFoundException("Nenhuma categoria encontrada!"));
-
+    public Category created(Category category) {
+        return categoryServicePort.created(category);
     }
 }

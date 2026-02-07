@@ -11,5 +11,5 @@ public interface CategoryServicePort {
 
     Optional<Category> findById(Integer id);
 
-    Optional<Category> findByName(String name);
+    Category created(Category category);
 }

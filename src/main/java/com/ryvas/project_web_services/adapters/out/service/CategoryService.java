@@ -2,9 +2,12 @@ package com.ryvas.project_web_services.adapters.out.service;
 
 import com.ryvas.project_web_services.adapters.mapper.CategoryMapper;
 import com.ryvas.project_web_services.adapters.out.repository.CategoryRepository;
+import com.ryvas.project_web_services.domain.exception.DatabaseException;
 import com.ryvas.project_web_services.domain.model.Category;
 import com.ryvas.project_web_services.port.out.CategoryServicePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,8 +33,13 @@ public class CategoryService implements CategoryServicePort {
     }
 
     @Override
-    public Optional<Category> findByName(String name) {
-        return categoryRepository.findByName(name)
-                .map(categoryMapper::toModel);
+    public Category created(Category category) {
+        try {
+        return categoryMapper.toModel(categoryRepository.save(categoryMapper.toEntity(category)));
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Erro de integridade ao criar categoria");
+        } catch (DataAccessException e) {
+            throw new DatabaseException("Erro ao acessar banco de dados");
+        }
     }
 }
