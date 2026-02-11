@@ -86,7 +86,6 @@ O **domínio não depende de Spring, JPA ou banco de dados**.
 | MapStruct | 1.5.5 |
 | Lombok | 1.18.34 |
 | H2 | Desenvolvimento/Teste |
-| PostgreSQL | Produção |
 | Maven | Build Tool |
 
 ---
