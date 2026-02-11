@@ -87,6 +87,7 @@ O **domínio não depende de Spring, JPA ou banco de dados**.
 | Lombok | 1.18.34 |
 | H2 | Desenvolvimento/Teste |
 | Maven | Build Tool |
+| Insomnia | Teste e validação dos endpoints |
 
 ---
 
@@ -113,6 +114,20 @@ O **domínio não depende de Spring, JPA ou banco de dados**.
 - POST `/products`
 - GET `/products`
 - GET `/products/{id}`
+
+---
+
+# 🌐 Testes da API
+
+Todos os endpoints foram testados utilizando o **Insomnia**, validando:
+
+- Operações CRUD
+- Serialização e desserialização JSON
+- Códigos de status HTTP
+- Tratamento de exceções
+- Estrutura de respostas
+
+O uso do Insomnia permitiu simular cenários reais de consumo da API.
 
 ---
 
